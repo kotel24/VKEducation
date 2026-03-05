@@ -13,6 +13,8 @@ import androidx.compose.runtime.setValue
 import ru.sumin.vkeducation.screen.MainScreen
 import ru.sumin.vkeducation.ui.theme.VKEducationTheme
 import ru.sumin.vkeducation.util.Contract
+import ru.sumin.vkeducation.util.Contract.chooserIntent
+import ru.sumin.vkeducation.util.Contract.uriIntent
 import ru.sumin.vkeducation.util.sanitizePhone
 import ru.sumin.vkeducation.util.validatePhone
 
@@ -42,8 +44,14 @@ class MainActivity : ComponentActivity() {
                     onDial = {
                         if (error == null) {
                             val uri = Uri.fromParts("tel", text, null)
-                            startActivity(Intent(Intent.ACTION_DIAL).apply { data = uri })
+                            val intent = uriIntent(uri = uri)
+                            startActivity(intent)
                         }
+                    },
+                    onShare = {
+                        val intent = chooserIntent(text = text)
+                        val chooser = Intent.createChooser(intent, "Поделиться через")
+                        startActivity(chooser)
                     }
                 )
             }
