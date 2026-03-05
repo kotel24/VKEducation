@@ -21,7 +21,8 @@ fun MainScreen(
     error: String?,
     onTextChanged: (String) -> Unit,
     onOpenSecond: (String) -> Unit,
-    onDial: (String) -> Unit
+    onDial: (String) -> Unit,
+    onShare: () -> Unit
 ){
     Column(
         modifier = Modifier
@@ -53,6 +54,14 @@ fun MainScreen(
             enabled = error == null && text.isNotBlank()
         ) {
             Text("Открыть приложение для звонков")
+        }
+
+        Button(
+            onClick = onShare,
+            enabled = text.isNotBlank(),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Поделиться текстом")
         }
     }
 }
