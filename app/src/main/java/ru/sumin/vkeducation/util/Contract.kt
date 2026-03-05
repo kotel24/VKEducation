@@ -2,6 +2,7 @@ package ru.sumin.vkeducation.util
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import ru.sumin.vkeducation.SecondActivity
 
 object Contract {
@@ -14,5 +15,16 @@ object Contract {
 
     fun readText(intent: Intent): String {
         return intent.getStringExtra(EXTRA_TEXT).orEmpty()
+    }
+
+    fun uriIntent(uri: Uri): Intent{
+        return Intent(Intent.ACTION_DIAL).apply { data = uri }
+    }
+
+    fun  chooserIntent(text: String): Intent{
+        return Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, text)
+        }
     }
 }
