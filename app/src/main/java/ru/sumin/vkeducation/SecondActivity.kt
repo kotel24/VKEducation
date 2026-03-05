@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import ru.sumin.vkeducation.screen.SecondScreen
 import ru.sumin.vkeducation.ui.theme.VKEducationTheme
+import ru.sumin.vkeducation.util.Contract
 
 class SecondActivity : ComponentActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
