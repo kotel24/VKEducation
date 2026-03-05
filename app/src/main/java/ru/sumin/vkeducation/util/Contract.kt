@@ -1,7 +1,8 @@
-package ru.sumin.vkeducation
+package ru.sumin.vkeducation.util
 
 import android.content.Context
 import android.content.Intent
+import ru.sumin.vkeducation.SecondActivity
 
 object Contract {
     private const val EXTRA_TEXT = "extra_text"
