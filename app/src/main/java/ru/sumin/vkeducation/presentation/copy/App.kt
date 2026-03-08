@@ -1,4 +1,4 @@
-package ru.sumin.vkeducation.presentation
+package ru.sumin.vkeducation.presentation.copy
 
 data class App(
     val name: String,
