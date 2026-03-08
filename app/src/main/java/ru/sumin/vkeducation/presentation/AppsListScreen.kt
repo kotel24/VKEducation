@@ -40,6 +40,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import ru.sumin.vkeducation.R
+import ru.sumin.vkeducation.presentation.copy.App
+import ru.sumin.vkeducation.presentation.copy.Category
 
 
 @Composable
