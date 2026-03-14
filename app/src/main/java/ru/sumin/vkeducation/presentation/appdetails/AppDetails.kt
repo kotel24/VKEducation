@@ -1,6 +1,6 @@
-package ru.sumin.vkeducation.presentation.copy
+package ru.sumin.vkeducation.presentation.appdetails
 
-data class App(
+data class AppDetails(
     val name: String,
     val developer: String,
     val category: Category,

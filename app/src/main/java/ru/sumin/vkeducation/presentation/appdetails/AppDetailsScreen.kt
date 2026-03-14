@@ -1,4 +1,4 @@
-package ru.sumin.vkeducation.presentation.copy
+package ru.sumin.vkeducation.presentation.appdetails
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
@@ -44,7 +44,7 @@ fun AppDetailsScreen(
         )
         Spacer(Modifier.height(8.dp))
         AppDetailsHeader(
-            app = app,
+            appDetails = app,
             modifier = Modifier.padding(horizontal = 16.dp),
         )
         Spacer(Modifier.height(16.dp))
@@ -90,7 +90,7 @@ fun AppDetailsScreen(
     }
 }
 
-private fun getApp(): App = App(
+private fun getApp(): AppDetails = AppDetails(
     name = "Гильдия Героев: Экшен ММО РПГ",
     developer = "VK Play",
     category = Category.GAME,

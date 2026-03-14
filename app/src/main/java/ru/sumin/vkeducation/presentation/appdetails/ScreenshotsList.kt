@@ -1,4 +1,4 @@
-package ru.sumin.vkeducation.presentation.copy
+package ru.sumin.vkeducation.presentation.appdetails
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues

@@ -1,4 +1,4 @@
-package ru.sumin.vkeducation.ui.theme
+package ru.sumin.vkeducation.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.rememberNavController
 import ru.sumin.vkeducation.navigation.AppNavHost
-import ru.sumin.vkeducation.ui.theme.VKEducationTheme
+import ru.sumin.vkeducation.presentation.ui.theme.VKEducationTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

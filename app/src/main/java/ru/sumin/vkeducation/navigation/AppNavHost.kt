@@ -7,7 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import ru.sumin.vkeducation.presentation.AppsListScreen
-import ru.sumin.vkeducation.presentation.copy.AppDetailsScreen
+import ru.sumin.vkeducation.presentation.appdetails.AppDetailsScreen
 
 @Composable
 fun AppNavHost(

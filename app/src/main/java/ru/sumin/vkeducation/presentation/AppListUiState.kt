@@ -1,7 +1,7 @@
 package ru.sumin.vkeducation.presentation
 
-import ru.sumin.vkeducation.presentation.copy.App
+import ru.sumin.vkeducation.presentation.appdetails.AppDetails
 
 data class AppListUiState (
-    val apps: List<App> = emptyList()
+    val appDetails: List<AppDetails> = emptyList()
 )

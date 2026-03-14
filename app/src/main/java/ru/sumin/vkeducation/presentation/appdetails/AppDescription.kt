@@ -1,4 +1,4 @@
-package ru.sumin.vkeducation.presentation.copy
+package ru.sumin.vkeducation.presentation.appdetails
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -14,7 +14,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.sumin.vkeducation.R
-import ru.sumin.vkeducation.ui.theme.VKEducationTheme
+import ru.sumin.vkeducation.presentation.ui.theme.VKEducationTheme
 
 @Composable
 fun AppDescription(

@@ -5,13 +5,13 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
-import ru.sumin.vkeducation.presentation.copy.App
-import ru.sumin.vkeducation.presentation.copy.Category
+import ru.sumin.vkeducation.presentation.appdetails.AppDetails
+import ru.sumin.vkeducation.presentation.appdetails.Category
 
 class AppListViewModel : ViewModel() {
 
     private val _uiState = MutableStateFlow(
-        AppListUiState(apps = getAppsList())
+        AppListUiState(appDetails = getAppsList())
     )
 
     val uiState = _uiState.asStateFlow()
@@ -26,8 +26,8 @@ class AppListViewModel : ViewModel() {
         )
     }
 
-    private fun getAppsList(): List<App> = listOf(
-        App(
+    private fun getAppsList(): List<AppDetails> = listOf(
+        AppDetails(
             name = "СберБанк Онлайн — с Салютом",
             developer = "Больше чем банк",
             category = Category.APP,
@@ -37,7 +37,7 @@ class AppListViewModel : ViewModel() {
             screenshotUrlList = emptyList(),
             description = "Финансы",
         ),
-        App(
+        AppDetails(
             name = "Яндекс.Браузер — с Алисой",
             developer = "Быстрый и безопасный браузер",
             category = Category.APP,
@@ -47,7 +47,7 @@ class AppListViewModel : ViewModel() {
             screenshotUrlList = emptyList(),
             description = "Инструменты",
         ),
-        App(
+        AppDetails(
             name = "Почта Mail.ru",
             developer = "Почтовый клиент для любых ящиков",
             category = Category.APP,
@@ -57,7 +57,7 @@ class AppListViewModel : ViewModel() {
             screenshotUrlList = emptyList(),
             description = "Инструменты",
         ),
-        App(
+        AppDetails(
             name = "Яндекс Навигатор",
             developer = "Парковки и заправки — по пути",
             category = Category.APP,
@@ -67,7 +67,7 @@ class AppListViewModel : ViewModel() {
             screenshotUrlList = emptyList(),
             description = "Транспорт",
         ),
-        App(
+        AppDetails(
             name = "Мой МТС",
             developer = "Мой МТС — центр экосистемы МТС",
             category = Category.APP,
@@ -77,7 +77,7 @@ class AppListViewModel : ViewModel() {
             screenshotUrlList = emptyList(),
             description = "Инструменты",
         ),
-        App(
+        AppDetails(
             name = "Яндекс — с Алисой",
             developer = "Яндекс — поиск всегда под рукой",
             category = Category.APP,

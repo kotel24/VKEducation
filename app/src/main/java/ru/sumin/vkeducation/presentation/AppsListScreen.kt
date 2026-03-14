@@ -47,13 +47,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
 import ru.sumin.vkeducation.R
-import ru.sumin.vkeducation.presentation.copy.App
+import ru.sumin.vkeducation.presentation.appdetails.AppDetails
 
 
 @Composable
 fun AppsListScreen(
     modifier: Modifier = Modifier,
-    onAppClick: (App) -> Unit = {},
+    onAppClick: (AppDetails) -> Unit = {},
     viewModel: AppListViewModel = viewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -88,7 +88,7 @@ fun AppsListScreen(
             AppsListTopBar(onLogoClick = { viewModel.onLogoClick() })
 
             AppsListContent(
-                apps = uiState.apps,
+                appDetails = uiState.appDetails,
                 onAppClick = onAppClick,
                 contentPadding = PaddingValues(10.dp)
             )
@@ -98,8 +98,8 @@ fun AppsListScreen(
 
 @Composable
 private fun AppsListContent(
-    apps: List<App>,
-    onAppClick: (App) -> Unit,
+    appDetails: List<AppDetails>,
+    onAppClick: (AppDetails) -> Unit,
     contentPadding: PaddingValues,
 ) {
 
@@ -113,11 +113,11 @@ private fun AppsListContent(
             contentPadding = contentPadding,
         ) {
             items(
-                items = apps,
+                items = appDetails,
                 key = { it.name }
             ) { app ->
                 AppRow(
-                    app = app,
+                    appDetails = app,
                     onClick = { onAppClick(app) }
                 )
             }
@@ -177,7 +177,7 @@ private fun AppsListTopBar(
 
 @Composable
 private fun AppRow(
-    app: App,
+    appDetails: AppDetails,
     onClick: () -> Unit,
 ) {
     Row(
@@ -188,8 +188,8 @@ private fun AppRow(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         AsyncImage(
-            model = app.iconUrl,
-            contentDescription = app.name,
+            model = appDetails.iconUrl,
+            contentDescription = appDetails.name,
             modifier = Modifier
                 .size(60.dp)
                 .clip(RoundedCornerShape(16.dp)),
@@ -203,7 +203,7 @@ private fun AppRow(
             verticalArrangement = Arrangement.Center,
         ) {
             Text(
-                text = app.name,
+                text = appDetails.name,
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Medium,
                 color = Color(0xFF151515),
@@ -214,7 +214,7 @@ private fun AppRow(
             Spacer(modifier = Modifier.height(4.dp))
 
             Text(
-                text = app.developer,
+                text = appDetails.developer,
                 style = MaterialTheme.typography.bodyLarge,
                 color = Color(0xFF2D2D2D),
                 maxLines = 1,
@@ -224,7 +224,7 @@ private fun AppRow(
             Spacer(modifier = Modifier.height(6.dp))
 
             Text(
-                text = app.description,
+                text = appDetails.description,
                 style = MaterialTheme.typography.bodyMedium,
                 color = Color(0xFF8E8E93),
                 maxLines = 1,
