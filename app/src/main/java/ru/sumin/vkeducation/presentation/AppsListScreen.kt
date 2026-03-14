@@ -79,7 +79,6 @@ fun AppsListScreen(
             modifier = modifier
                 .fillMaxSize()
                 .background(Color(0xFF0079FF))
-                .padding(paddingValues)
         ) {
             Spacer(
                 modifier = Modifier.windowInsetsTopHeight(WindowInsets.statusBars)

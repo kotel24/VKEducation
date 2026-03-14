@@ -11,10 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.sumin.vkeducation.R
-import ru.sumin.vkeducation.presentation.ui.theme.VKEducationTheme
 
 @Composable
 fun AppDescription(
@@ -42,29 +40,5 @@ fun AppDescription(
                 )
             }
         }
-    }
-}
-
-@Preview
-@Composable
-private fun PreviewShort() {
-    VKEducationTheme {
-        AppDescription(
-            description = "Легендарный рейд героев в Фэнтези РПГ. Станьте героем гильдии и зразите мастера подземелья!",
-            onReadMoreClick = {},
-            collapsed = false,
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun PreviewCollapsed() {
-    VKEducationTheme {
-        AppDescription(
-            description = "Легендарный рейд героев в Фэнтези РПГ. Станьте героем гильдии и зразите мастера подземелья!",
-            onReadMoreClick = {},
-            collapsed = true,
-        )
     }
 }

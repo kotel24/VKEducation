@@ -1,8 +1,6 @@
 package ru.sumin.vkeducation.navigation
 
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -27,7 +25,6 @@ fun AppNavHost(
 
         composable(Screen.AppDetails.route) {
             AppDetailsScreen(
-                modifier = Modifier.fillMaxSize(),
                 onBackClick = {
                     navController.popBackStack()
                 }
