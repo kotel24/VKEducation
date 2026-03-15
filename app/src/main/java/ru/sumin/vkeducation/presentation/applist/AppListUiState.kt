@@ -1,7 +1,11 @@
 package ru.sumin.vkeducation.presentation.applist
 
-import ru.sumin.vkeducation.domain.appdetails.AppDetails
+import ru.sumin.vkeducation.domain.applist.AppsList
 
-data class AppListUiState (
-    val appDetails: List<AppDetails> = emptyList()
-)
+sealed interface AppListUiState {
+    data object Error: AppListUiState
+    data object Loading: AppListUiState
+    data class Content(
+        val appsList: List<AppsList> = emptyList(),
+    ): AppListUiState
+}

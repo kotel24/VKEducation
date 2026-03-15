@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
@@ -47,13 +48,15 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
 import ru.sumin.vkeducation.R
-import ru.sumin.vkeducation.domain.appdetails.AppDetails
+import ru.sumin.vkeducation.domain.applist.AppsList
+import ru.sumin.vkeducation.presentation.appdetails.AppDetailsError
+import ru.sumin.vkeducation.presentation.appdetails.AppDetailsLoading
 
 
 @Composable
 fun AppsListScreen(
     modifier: Modifier = Modifier,
-    onAppClick: (AppDetails) -> Unit = {},
+    onAppClick: (AppsList) -> Unit = {},
     viewModel: AppListViewModel = viewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -75,33 +78,54 @@ fun AppsListScreen(
             SnackbarHost(snackbarHostState)
         }
     ) { paddingValues ->
-        Column(
-            modifier = modifier
-                .fillMaxSize()
-                .background(Color(0xFF0079FF))
-        ) {
-            Spacer(
-                modifier = Modifier.windowInsetsTopHeight(WindowInsets.statusBars)
-            )
+        when (val currentState = uiState) {
+            is AppListUiState.Loading -> {
+                AppDetailsLoading(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .safeDrawingPadding()
+                )
+            }
 
-            AppsListTopBar(onLogoClick = { viewModel.onLogoClick() })
+            is AppListUiState.Error -> {
+                AppDetailsError(
+                    onRefreshClick = { viewModel.getAppsList() },
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .safeDrawingPadding()
+                )
+            }
 
-            AppsListContent(
-                appDetails = uiState.appDetails,
-                onAppClick = onAppClick,
-                contentPadding = PaddingValues(10.dp)
-            )
+            is AppListUiState.Content -> {
+                Column(
+                    modifier = modifier
+                        .fillMaxSize()
+                        .background(Color(0xFF0079FF))
+                ) {
+                    Spacer(
+                        modifier = Modifier.windowInsetsTopHeight(WindowInsets.statusBars)
+                    )
+
+                    AppsListTopBar(onLogoClick = { viewModel.onLogoClick() })
+
+                    AppsListContent(
+                        content = currentState,
+                        onAppClick = onAppClick,
+                        contentPadding = PaddingValues(10.dp)
+                    )
+                }
+            }
         }
     }
 }
 
 @Composable
 private fun AppsListContent(
-    appDetails: List<AppDetails>,
-    onAppClick: (AppDetails) -> Unit,
+    content: AppListUiState.Content,
+    onAppClick: (AppsList) -> Unit,
     contentPadding: PaddingValues,
 ) {
-
+    val apps = content.appsList
     Surface(
         modifier = Modifier.fillMaxSize(),
         shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
@@ -112,11 +136,11 @@ private fun AppsListContent(
             contentPadding = contentPadding,
         ) {
             items(
-                items = appDetails,
+                items = apps,
                 key = { it.name }
             ) { app ->
                 AppRow(
-                    appDetails = app,
+                    apps = app,
                     onClick = { onAppClick(app) }
                 )
             }
@@ -176,7 +200,7 @@ private fun AppsListTopBar(
 
 @Composable
 private fun AppRow(
-    appDetails: AppDetails,
+    apps: AppsList,
     onClick: () -> Unit,
 ) {
     Row(
@@ -187,8 +211,8 @@ private fun AppRow(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         AsyncImage(
-            model = appDetails.iconUrl,
-            contentDescription = appDetails.name,
+            model = apps.iconUrl,
+            contentDescription = apps.name,
             modifier = Modifier
                 .size(60.dp)
                 .clip(RoundedCornerShape(16.dp)),
@@ -202,7 +226,7 @@ private fun AppRow(
             verticalArrangement = Arrangement.Center,
         ) {
             Text(
-                text = appDetails.name,
+                text = apps.name,
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Medium,
                 color = Color(0xFF151515),
@@ -213,7 +237,7 @@ private fun AppRow(
             Spacer(modifier = Modifier.height(4.dp))
 
             Text(
-                text = appDetails.developer,
+                text = apps.developer,
                 style = MaterialTheme.typography.bodyLarge,
                 color = Color(0xFF2D2D2D),
                 maxLines = 1,
@@ -223,7 +247,7 @@ private fun AppRow(
             Spacer(modifier = Modifier.height(6.dp))
 
             Text(
-                text = appDetails.description,
+                text = apps.description,
                 style = MaterialTheme.typography.bodyMedium,
                 color = Color(0xFF8E8E93),
                 maxLines = 1,
