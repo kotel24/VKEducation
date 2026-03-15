@@ -1,12 +1,12 @@
-package ru.sumin.vkeducation.presentation
+package ru.sumin.vkeducation.presentation.applist
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
-import ru.sumin.vkeducation.presentation.appdetails.AppDetails
-import ru.sumin.vkeducation.presentation.appdetails.Category
+import ru.sumin.vkeducation.domain.appdetails.AppDetails
+import ru.sumin.vkeducation.domain.appdetails.Category
 
 class AppListViewModel : ViewModel() {
 
@@ -16,7 +16,7 @@ class AppListViewModel : ViewModel() {
 
     val uiState = _uiState.asStateFlow()
 
-    private val _events = Channel<AppsListEvent>(Channel.BUFFERED)
+    private val _events = Channel<AppsListEvent>(Channel.Factory.BUFFERED)
 
     val events = _events.receiveAsFlow()
 

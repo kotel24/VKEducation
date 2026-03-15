@@ -1,4 +1,4 @@
-package ru.sumin.vkeducation.presentation
+package ru.sumin.vkeducation.presentation.applist
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -47,7 +47,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
 import ru.sumin.vkeducation.R
-import ru.sumin.vkeducation.presentation.appdetails.AppDetails
+import ru.sumin.vkeducation.domain.appdetails.AppDetails
 
 
 @Composable

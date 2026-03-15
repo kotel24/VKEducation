@@ -24,6 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import ru.sumin.vkeducation.R
+import ru.sumin.vkeducation.domain.appdetails.AppDetails
+import ru.sumin.vkeducation.domain.appdetails.Category
 import ru.sumin.vkeducation.presentation.ui.theme.VKEducationTheme
 import kotlin.math.roundToInt
 

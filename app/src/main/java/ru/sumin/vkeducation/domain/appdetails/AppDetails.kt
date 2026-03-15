@@ -1,4 +1,4 @@
-package ru.sumin.vkeducation.presentation.appdetails
+package ru.sumin.vkeducation.domain.appdetails
 
 data class AppDetails(
     val name: String,
