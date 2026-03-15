@@ -1,4 +1,4 @@
-package ru.sumin.vkeducation.navigation
+package ru.sumin.vkeducation.presentation.navigation
 
 sealed class Screen(val route: String) {
 

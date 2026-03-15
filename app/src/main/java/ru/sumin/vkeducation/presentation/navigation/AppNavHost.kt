@@ -1,4 +1,4 @@
-package ru.sumin.vkeducation.navigation
+package ru.sumin.vkeducation.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
