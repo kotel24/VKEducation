@@ -1,9 +1,9 @@
 package ru.sumin.vkeducation.domain.appdetails
 
-import ru.sumin.vkeducation.data.appdetails.AppDetailsRepositorImpl
+import javax.inject.Inject
 
-class GetAppDetailsUseCase(
-    private val appDetailsRepository: AppDetailsRepositorImpl
+class GetAppDetailsUseCase @Inject constructor(
+    private val appDetailsRepository: AppDetailsRepository
 ){
     suspend operator fun invoke(): AppDetails{
         val app: AppDetails = appDetailsRepository.get()
