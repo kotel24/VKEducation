@@ -1,10 +1,11 @@
 package ru.sumin.vkeducation.domain.applist
 
-class GetAppsListUseCase (
+import javax.inject.Inject
+
+class GetAppsListUseCase @Inject constructor(
     private val repository: AppsListRepository
 ){
     suspend operator fun invoke(): List<AppsList> {
-        val app: List<AppsList> = repository.get()
-        return app
+        return repository.get()
     }
 }

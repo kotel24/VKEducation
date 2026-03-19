@@ -2,10 +2,13 @@ package ru.sumin.vkeducation.data.appdetails
 
 import ru.sumin.vkeducation.domain.appdetails.AppDetails
 import ru.sumin.vkeducation.domain.appdetails.AppDetailsRepository
+import javax.inject.Inject
 
-class AppDetailsRepositorImpl : AppDetailsRepository {
-    private val appApi = AppApi()
-    private val mapper = AppDetailsMapper()
+class AppDetailsRepositoryImpl @Inject constructor(
+    private val appApi: AppApi,
+    private val mapper: AppDetailsMapper
+) : AppDetailsRepository {
+
 
     override suspend fun get(): AppDetails {
         val dto = appApi.get()

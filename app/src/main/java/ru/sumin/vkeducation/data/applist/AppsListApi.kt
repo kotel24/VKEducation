@@ -2,9 +2,10 @@ package ru.sumin.vkeducation.data.applist
 
 import kotlinx.coroutines.delay
 import ru.sumin.vkeducation.domain.appdetails.Category
+import javax.inject.Inject
 import kotlin.time.Duration.Companion.seconds
 
-class AppsListApi {
+class AppsListApi @Inject constructor() {
     suspend fun getAppsList(): List<AppsListDto> {
 
         delay(1.seconds)

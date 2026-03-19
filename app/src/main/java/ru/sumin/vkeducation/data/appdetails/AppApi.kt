@@ -2,10 +2,11 @@ package ru.sumin.vkeducation.data.appdetails
 
 import kotlinx.coroutines.delay
 import ru.sumin.vkeducation.domain.appdetails.Category
+import javax.inject.Inject
 import kotlin.time.Duration.Companion.seconds
 
 // Представим, что этот класс ходит в сеть.
-class AppApi {
+class AppApi @Inject constructor() {
     suspend fun get(): AppDetailsDto {
         // Эмулируем загрузку с бэкенда
         delay(2.seconds)
