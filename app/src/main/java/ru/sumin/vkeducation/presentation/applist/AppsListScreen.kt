@@ -237,7 +237,7 @@ private fun AppRow(
             Spacer(modifier = Modifier.height(4.dp))
 
             Text(
-                text = apps.developer,
+                text = apps.category,
                 style = MaterialTheme.typography.bodyLarge,
                 color = Color(0xFF2D2D2D),
                 maxLines = 1,
