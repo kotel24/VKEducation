@@ -1,5 +1,6 @@
 package ru.sumin.vkeducation.presentation.appdetails
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -49,13 +50,14 @@ class AppDetailsViewModel @Inject constructor(
             _state.value = AppDetailsState.Loading
 
             runCatching {
-                val appDetails = getAppDetailsUseCase()
+                val appDetails = getAppDetailsUseCase("fa2e31b8-1234-4cf7-9914-108a170a1b01")
 
                 _state.value = AppDetailsState.Content(
                     appDetails = appDetails,
                     descriptionCollapsed = false,
                 )
             }.onFailure {
+                Log.d("HOHOHO", "ERROR : $it")
                 _state.value = AppDetailsState.Error
             }
         }

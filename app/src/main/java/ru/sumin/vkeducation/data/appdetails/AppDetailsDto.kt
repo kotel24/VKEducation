@@ -1,15 +1,26 @@
 package ru.sumin.vkeducation.data.appdetails
 
-import ru.sumin.vkeducation.domain.appdetails.Category
+import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 
-
+@Serializable
 data class AppDetailsDto(
+    @SerializedName("id")
+    val id: String,
+    @SerializedName("name")
     val name: String,
+    @SerializedName("developer")
     val developer: String,
-    val category: Category,
+    @SerializedName("category")
+    val category: String,
+    @SerializedName("ageRating")
     val ageRating: Int,
+    @SerializedName("size")
     val size: Double,
-    val icon: String,
-    val screenshots: List<String>,
+    @SerializedName("iconUrl")
+    val iconUrl: String,
+    @SerializedName("screenshotUrlList")
+    val screenshotUrlList: List<String>,
+    @SerializedName("description")
     val description: String,
 )

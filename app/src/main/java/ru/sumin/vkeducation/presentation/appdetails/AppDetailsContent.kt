@@ -44,7 +44,7 @@ fun AppDetailsContent(
         )
         Spacer(Modifier.height(12.dp))
         ScreenshotsList(
-            screenshotUrlList = appDetails.screenshotUrlList,
+            screenshotUrlList = appDetails.screenshots?: emptyList(),
             contentPadding = PaddingValues(horizontal = 16.dp),
         )
         Spacer(Modifier.height(12.dp))
