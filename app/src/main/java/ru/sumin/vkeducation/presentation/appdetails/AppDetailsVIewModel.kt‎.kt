@@ -1,6 +1,6 @@
 package ru.sumin.vkeducation.presentation.appdetails
 
-import android.util.Log
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,8 +16,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AppDetailsViewModel @Inject constructor(
-    private val getAppDetailsUseCase: GetAppDetailsUseCase
+    private val getAppDetailsUseCase: GetAppDetailsUseCase,
+    savedStateHandle: SavedStateHandle
 ): ViewModel() {
+
+    private val id: String = checkNotNull(savedStateHandle["id"])
 
     private val _state = MutableStateFlow<AppDetailsState>(AppDetailsState.Loading)
     val state = _state.asStateFlow()
@@ -26,6 +29,10 @@ class AppDetailsViewModel @Inject constructor(
     val events = _events.receiveAsFlow()
 
     init {
+        getAppDetails()
+    }
+
+    fun refresh(){
         getAppDetails()
     }
 
@@ -45,19 +52,16 @@ class AppDetailsViewModel @Inject constructor(
         }
     }
 
-    fun getAppDetails() {
+    private fun getAppDetails() {
         viewModelScope.launch {
             _state.value = AppDetailsState.Loading
-
-            runCatching {
-                val appDetails = getAppDetailsUseCase("fa2e31b8-1234-4cf7-9914-108a170a1b01")
-
+            try {
+                val appDetails = getAppDetailsUseCase(id = id)
                 _state.value = AppDetailsState.Content(
                     appDetails = appDetails,
-                    descriptionCollapsed = false,
+                    descriptionCollapsed = false
                 )
-            }.onFailure {
-                Log.d("HOHOHO", "ERROR : $it")
+            } catch (e: Exception){
                 _state.value = AppDetailsState.Error
             }
         }

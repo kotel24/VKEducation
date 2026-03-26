@@ -50,7 +50,7 @@ fun AppDetailsScreen(
 
             is AppDetailsState.Error -> {
                 AppDetailsError(
-                    onRefreshClick = { viewModel.getAppDetails() },
+                    onRefreshClick = { viewModel.refresh() },
                     modifier = Modifier
                         .fillMaxSize()
                         .safeDrawingPadding()
