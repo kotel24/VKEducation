@@ -1,13 +1,8 @@
 package ru.sumin.vkeducation.presentation.navigation
 
 sealed class Screen(val route: String) {
-
-    data object AppsList : Screen(APPS_LIST)
-
-    data object AppDetails : Screen(APPS_DETAILS)
-
-    companion object {
-        private const val APPS_LIST = "apps_list"
-        private const val APPS_DETAILS = "app_details"
+    data object AppsList : Screen("apps_list")
+    data object AppDetails : Screen("app_details/{id}") {
+        fun createRoute(id: String): String = "app_details/$id"
     }
 }
