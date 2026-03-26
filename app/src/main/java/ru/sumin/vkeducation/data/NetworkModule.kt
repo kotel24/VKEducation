@@ -1,5 +1,7 @@
 package ru.sumin.vkeducation.data
 
+import android.app.Application
+import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -9,6 +11,10 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.sumin.vkeducation.data.appdetails.AppDetailsApi
+import ru.sumin.vkeducation.data.appdetails.AppDetailsMapper
+import ru.sumin.vkeducation.data.appdetails.local.AppDatabase
+import ru.sumin.vkeducation.data.appdetails.local.AppDetailsDao
+import ru.sumin.vkeducation.data.appdetails.local.AppDetailsEntityMapper
 import ru.sumin.vkeducation.data.applist.AppsListApi
 import javax.inject.Singleton
 
@@ -58,4 +64,33 @@ object NetworkModule {
     fun provideAppDetailsApi(retrofit: Retrofit): AppDetailsApi {
         return retrofit.create(AppDetailsApi::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideDatabase(app: Application): AppDatabase {
+        return Room.databaseBuilder(
+            app,
+            AppDatabase::class.java,
+            AppDatabase.DATABASE_NAME
+        ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideAppDetailsDao(database: AppDatabase): AppDetailsDao {
+        return database.appDetailsDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideAppDetailsEntityMapper(): AppDetailsEntityMapper {
+        return AppDetailsEntityMapper()
+    }
+
+    @Provides
+    @Singleton
+    fun provideAppDetailsMapper(): AppDetailsMapper {
+        return AppDetailsMapper()
+    }
+
 }
