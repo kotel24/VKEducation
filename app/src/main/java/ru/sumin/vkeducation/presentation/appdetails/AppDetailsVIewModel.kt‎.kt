@@ -8,15 +8,20 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.BUFFERED
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ru.sumin.vkeducation.domain.appdetails.GetAppDetailsUseCase
+import ru.sumin.vkeducation.domain.appdetails.ObserveAppDetailsUseCase
+import ru.sumin.vkeducation.domain.appdetails.ToggleWishlistUseCase
 import javax.inject.Inject
 
 @HiltViewModel
 class AppDetailsViewModel @Inject constructor(
     private val getAppDetailsUseCase: GetAppDetailsUseCase,
+    private val observeAppDetailsUseCase: ObserveAppDetailsUseCase,
+    private val toggleWishlistUseCase: ToggleWishlistUseCase,
     savedStateHandle: SavedStateHandle
 ): ViewModel() {
 
@@ -29,11 +34,31 @@ class AppDetailsViewModel @Inject constructor(
     val events = _events.receiveAsFlow()
 
     init {
+        observeAppDetails()
         getAppDetails()
     }
 
     fun refresh(){
         getAppDetails()
+    }
+
+    private fun observeAppDetails() {
+        viewModelScope.launch {
+            observeAppDetailsUseCase(id)
+                .catch { _state.value = AppDetailsState.Error }
+                .collect { appDetails ->
+                    _state.value = AppDetailsState.Content(
+                        appDetails = appDetails,
+                        descriptionCollapsed = false,
+                    )
+                }
+        }
+    }
+
+    fun toggleWishlist(){
+        viewModelScope.launch {
+            toggleWishlistUseCase(id)
+        }
     }
 
     fun showUnderDevelopmentMessage() {
@@ -56,12 +81,8 @@ class AppDetailsViewModel @Inject constructor(
         viewModelScope.launch {
             _state.value = AppDetailsState.Loading
             try {
-                val appDetails = getAppDetailsUseCase(id = id)
-                _state.value = AppDetailsState.Content(
-                    appDetails = appDetails,
-                    descriptionCollapsed = false
-                )
-            } catch (e: Exception){
+                getAppDetailsUseCase(id = id)
+            } catch (e: Exception) {
                 _state.value = AppDetailsState.Error
             }
         }
