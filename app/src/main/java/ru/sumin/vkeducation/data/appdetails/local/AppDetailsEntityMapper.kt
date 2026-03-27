@@ -14,7 +14,8 @@ class AppDetailsEntityMapper {
         size = domain.size,
         iconUrl = domain.iconUrl,
         screenshots = null,
-        description = domain.description
+        description = domain.description,
+        isInWishlist = domain.isInWishlist
     )
 
     fun toDomain(entity: AppDetailsEntity): AppDetails = AppDetails(
@@ -26,6 +27,7 @@ class AppDetailsEntityMapper {
         size = entity.size,
         iconUrl = entity.iconUrl,
         screenshots = null,
-        description = entity.description
+        description = entity.description,
+        isInWishlist = entity.isInWishlist
     )
 }
