@@ -16,4 +16,7 @@ interface AppDetailsDao {
 
     @Query("DELETE FROM app_details WHERE id = :id")
     suspend fun deleteAppDetails(id: String)
+
+    @Query("UPDATE app_details SET isInWishlist = :isInWishlist WHERE id = :id")
+    suspend fun updateWishlistStatus(id: String, isInWishlist: Boolean)
 }

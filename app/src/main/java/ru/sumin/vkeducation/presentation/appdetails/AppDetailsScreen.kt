@@ -75,6 +75,10 @@ fun AppDetailsScreen(
                     onDeveloperClick = {
                         viewModel.showUnderDevelopmentMessage()
                     },
+                    onWishlistClick = {
+                        viewModel.toggleWishlist()
+                    },
+                    isInWishlist = currentState.appDetails.isInWishlist,
                     modifier = Modifier
                         .fillMaxSize()
                         .safeDrawingPadding()

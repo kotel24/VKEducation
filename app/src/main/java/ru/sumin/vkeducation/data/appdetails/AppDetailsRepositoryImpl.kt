@@ -1,7 +1,10 @@
 package ru.sumin.vkeducation.data.appdetails
 
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import ru.sumin.vkeducation.data.appdetails.local.AppDetailsDao
 import ru.sumin.vkeducation.data.appdetails.local.AppDetailsEntityMapper
@@ -28,5 +31,18 @@ class AppDetailsRepositoryImpl @Inject constructor(
             }
             domain
         }
+    }
+
+    override suspend fun toggleWishList(id: String) {
+        val currentEntity = dao.getAppDetails(id).first()
+        currentEntity?.let{
+            dao.updateWishlistStatus(id, !it.isInWishlist)
+        }
+    }
+
+    override fun observeAppDetails(id: String): Flow<AppDetails> {
+        return dao.getAppDetails(id)
+            .filterNotNull()
+            .map { entityMapper.toDomain(it) }
     }
 }
